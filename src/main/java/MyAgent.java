@@ -1,10 +1,16 @@
 import java.util.Random;
+import java.util.Arrays;
 /**
  * Describe your basic strategy here.
  * @author <your Github username>
  *
  */
 public class MyAgent extends Agent {
+	int[] fire = {1, 2, 3, 4, 5}; //taking a slice of an array
+	int start = 1;
+	int end = 2;
+	int[] ice = Arrays.copyOfRange(fire, start, end+1);
+	
   /**
    * A random number generator to randomly decide where to place a token.
    */
@@ -41,7 +47,7 @@ public class MyAgent extends Agent {
    *
    */
   public void move() {
-
+	 moveOnColumn(3);
   }
 
   /**
@@ -53,7 +59,7 @@ public class MyAgent extends Agent {
   public void moveOnColumn(int columnNumber) {
     // Find the top empty slot in the column
     // If the column is full, lowestEmptySlot will be -1
-    int lowestEmptySlotIndex = getLowestEmptyIndex(myGame.getColumn(columnNumber));
+    int lowestEmptySlotIndex = getLowestEmptyIndex(myGame.getColumn(columnNumber));//row number
     // if the column is not full
     if (lowestEmptySlotIndex > -1) {
       // get the slot in this column at this index
@@ -109,7 +115,17 @@ public class MyAgent extends Agent {
    * @return the column that would allow the agent to win.
    */
   public int iCanWin() {
+	 /* for (int i = 0; i<6; i++) {
+		 // if(myAgent.getLowestEmptyIndex(i-1) && myAgent.getLowestEmptyIndex(i-1) )
+	  //} */
+		 
     return 0;
+    //for loop for indices /- below spot (vert)
+    //for loop for columns+/- right and left
+    //for loop +/-1 and column+/- (diagonal)
+    //check vertical
+    //check horizontal
+    //check diagonal
   }
 
   /**
