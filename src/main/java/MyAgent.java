@@ -42,6 +42,9 @@ public class MyAgent extends Agent {
    */
   public void move() {
 
+    // If the enemy is going to win. Block them.
+    // If you are going to win. Do it.
+
   }
 
   /**
@@ -103,13 +106,65 @@ public class MyAgent extends Agent {
    * Returns the column that would allow the agent to win.
    *
    * <p>You might want your agent to check to see if it has a winning move available to it so that
-   * it can go ahead and make that move. Implement this method to return what column would
+   * it can go ahead and make that move. Implemen  t this method to return what column would
    * allow the agent to win.</p>
    *
    * @return the column that would allow the agent to win.
    */
+  // i can win horizontal
   public int iCanWin() {
-    return 0;
+    // i = 0
+    // array[i][i] you are (0, 0)
+    // array[i+1][i+1] you are now at (1, 1)
+    int columns = myGame.getColumnCount();
+    int rows = myGame.getRowCount();
+    char myTeam = 'Y';
+
+    if (iAmRed) {
+      myTeam = 'R';
+    }
+    // theres no winning spot
+    int toReturn = -1;
+
+    for (int i = 0; i < rows; i++) {
+      int lowestHorizontal = lowest(myGame.getBoardMatrix()[i]);
+      if (lowestHorizontal == -1) {
+        continue;
+      }
+
+      if (myGame.getBoardMatrix()[i][lowestHorizontal] == myTeam &&
+          myGame.getBoardMatrix()[i][lowestHorizontal + 1] == myTeam &&
+          myGame.getBoardMatrix()[i][lowestHorizontal + 2] == myTeam) {
+
+        toReturn = lowestHorizontal + 3;
+      }
+
+    }
+    // for loop for indices- (vertical)
+    // for loop for columns+/- (horizontal)
+    // for loop for index+/-1 and column+/- (diagonal)
+    return toReturn;
+  }
+
+  private int lowest(char[] row) {
+    char lol = 'Y';
+
+    if (iAmRed) {
+      lol = 'R';
+    }
+
+    int lowest = Integer.MAX_VALUE;
+    for (int i = 0; i < row.length; i++) {
+      if (row[i] == poo) {
+        if (i < lowest) {
+          lowest = i;
+        }
+      }
+    }
+    if (lowest == Integer.MAX_VALUE) {
+      return -1;
+    }
+    return lowest;
   }
 
   /**
@@ -122,6 +177,9 @@ public class MyAgent extends Agent {
    * @return the column that would allow the opponent to win.
    */
   public int theyCanWin() {
+    // Check vertical
+    // Check horizontal
+    // Check diagonal
     return 0;
   }
 
@@ -131,6 +189,6 @@ public class MyAgent extends Agent {
    * @return the agent's name
    */
   public String getName() {
-    return "My Agent";
+    return "boiblaster";
   }
 }
