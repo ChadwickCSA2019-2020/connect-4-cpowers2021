@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class MyAgentTest {
 
-	Connect4Game game; 
+  Connect4Game game;
 
 
 	@Before
@@ -39,7 +39,7 @@ public class MyAgentTest {
 
 		for (int i = 0; i < 3; i++) {
 			redAgent.moveOnColumn(2);
-			yellowAgent.moveOnColumn(1);   
+			yellowAgent.moveOnColumn(1);
 		}
 
 		assertEquals(redAgent.iCanWin(), 2);
@@ -53,13 +53,26 @@ public class MyAgentTest {
 		MyAgent yellowAgent = new MyAgent(game, false);
 		game.clearBoard();
 		for (int i = 0; i < 3; i++) {
-			redAgent.moveOnColumn(i);	
+			redAgent.moveOnColumn(i);
 			yellowAgent.moveOnColumn(i);
 		}
 
 		assertEquals(redAgent.iCanWin(), 3);
 
 	}
+	@Test
+  public void testICanWinHorizontally2() {
+    MyAgent redAgent = new MyAgent(game, true);
+    MyAgent yellowAgent = new MyAgent(game, false);
+    game.clearBoard();
+    for (int i = 1; i < 4; i++) {
+      redAgent.moveOnColumn(i);
+      yellowAgent.moveOnColumn(i);
+    }
+
+    assertEquals(redAgent.iCanWin(), 0);
+
+  }
 
 	// TODO: Write 2 test cases for testICanWinDiagonally
 	@Test
@@ -77,10 +90,26 @@ public class MyAgentTest {
 		yellowAgent.moveOnColumn(3);
 		redAgent.moveOnColumn(4);
 		yellowAgent.moveOnColumn(3);
-		redAgent.moveOnColumn(3);
-	
-		
+
 		assertEquals(redAgent.iCanWin(), 3);
+}
+	@Test
+  public void testICanWinDiagonally2() {
+    MyAgent redAgent = new MyAgent(game, true);
+    MyAgent yellowAgent = new MyAgent(game, false);
+    game.clearBoard();
+    redAgent.moveOnColumn(1);
+    yellowAgent.moveOnColumn(2);
+    redAgent.moveOnColumn(2);
+    yellowAgent.moveOnColumn(3);
+    redAgent.moveOnColumn(4);
+    yellowAgent.moveOnColumn(3);
+    redAgent.moveOnColumn(3);
+    yellowAgent.moveOnColumn(4);
+    redAgent.moveOnColumn(5);
+    yellowAgent.moveOnColumn(4);
+
+    assertEquals(redAgent.iCanWin(), 4);
 }
 
 	// TODO: Write testTheyCanWinHorizontally
@@ -94,7 +123,7 @@ public class MyAgentTest {
 			yellowAgent.moveOnColumn(i);
 		}
 
-		assertEquals(yellowAgent.theyCanWin(), 3);
+		assertEquals(redAgent.theyCanWin(), 3);
 	}
 	// TODO: Write testTheyCanWinDiagonally
 	@Test
@@ -110,12 +139,13 @@ public class MyAgentTest {
 		yellowAgent.moveOnColumn(2);
 		redAgent.moveOnColumn(3);
 		yellowAgent.moveOnColumn(3);
-		redAgent.moveOnColumn(3);
+		redAgent.moveOnColumn(4);
 		yellowAgent.moveOnColumn(3);
-		redAgent.moveOnColumn(3);
-	
-		
-		assertEquals(yellowAgent.theyCanWin(), 3);
+		redAgent.moveOnColumn(4);
+		yellowAgent.moveOnColumn(4);
+
+
+		assertEquals(yellowAgent.theyCanWin(), 4);
 }
 	// Tests you can win against a Beginner agent as Red
 	@Test
@@ -150,7 +180,7 @@ public class MyAgentTest {
 		int numberOfWins = 0;
 		for (int i = 0; i < 50; i++) {
 			game.clearBoard(); 
-			while(!game.boardFull() || game.gameWon() == 'N') {
+			while(!game.boardFull() && game.gameWon() == 'N') {
 				redAgent.move();
 				if (game.gameWon() != 'R') {
 					yellowAgent.move();
@@ -174,7 +204,7 @@ public class MyAgentTest {
 		int numberOfWins = 0;
 		for (int i = 0; i < 50; i++) {
 			game.clearBoard(); 
-			while(!game.boardFull() || game.gameWon() == 'N') {
+			while(!game.boardFull() && game.gameWon() == 'N') {
 				redAgent.move();
 				if (game.gameWon() != 'R') {
 					yellowAgent.move();
@@ -198,7 +228,7 @@ public class MyAgentTest {
 		int numberOfWins = 0;
 		for (int i = 0; i < 50; i++) {
 			game.clearBoard(); 
-			while(!game.boardFull() || game.gameWon() == 'N') {
+			while(!game.boardFull() && game.gameWon() == 'N') {
 				redAgent.move();
 				if (game.gameWon() != 'R') {
 					yellowAgent.move();

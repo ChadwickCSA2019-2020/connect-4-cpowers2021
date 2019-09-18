@@ -112,39 +112,82 @@ public class MyAgent extends Agent {
    * @return the column that would allow the agent to win.
    */
   // i can win horizontal
+  //  public int iCanWin() {
+  //    // i = 0
+  //   
+  //    int columns = myGame.getColumnCount();
+  //    int rows = myGame.getRowCount();
+  //    char myTeam = 'Y';
+  //
+  //    if (iAmRed) {
+  //      myTeam = 'R';
+  //    }
+  //    // theres no winning spot
+  //    int toReturn = -1;
+  //
+  //    for (int i = 0; i < rows; i++) {
+  //      int lowestHorizontal = lowest(myGame.getBoardMatrix()[i]);
+  //      if (lowestHorizontal == -1) {
+  //        continue;
+  //      }
+  //
+  //      if (myGame.getBoardMatrix()[i][lowestHorizontal] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestHorizontal + 1] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestHorizontal + 2] == myTeam) {
+  //
+  //        toReturn = lowestHorizontal + 3;
+  //      }
+  //     
+  //      // for loop for indices- (vertical)
+  //    }
+  //    
+  //    for (int i = 0; i < columns; i++) {
+  //      int lowestVertical = lowest(myGame.getBoardMatrix()[i]);
+  //      if (lowestVertical == -1) {
+  //        continue;
+  //      }
+  //
+  //      if (myGame.getBoardMatrix()[i][lowestVertical] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestVertical + 1] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestVertical + 2] == myTeam) {
+  //
+  //        toReturn = lowestVertical + 3;
+  //      }
+  //
+  //    }
+  //   
+  //    // for loop for columns+/- (horizontal)
+  //    // for loop for index+/-1 and column+/- (diagonal)
+  //    return toReturn;
+  //  }
+
+  // i can win vertical and horizontal
   public int iCanWin() {
-    // i = 0
-    // array[i][i] you are (0, 0)
-    // array[i+1][i+1] you are now at (1, 1)
-    int columns = myGame.getColumnCount();
-    int rows = myGame.getRowCount();
-    char myTeam = 'Y';
-
-    if (iAmRed) {
-      myTeam = 'R';
-    }
-    // theres no winning spot
-    int toReturn = -1;
-
-    for (int i = 0; i < rows; i++) {
-      int lowestHorizontal = lowest(myGame.getBoardMatrix()[i]);
-      if (lowestHorizontal == -1) {
-        continue;
+    for (int i = 0; i < 6; i++) {
+      // create a copy of the current game
+      Connect4Game gameCopy = new Connect4Game(myGame);
+      // need an agent to play our copied game
+      MyAgent agentCopy = new MyAgent(gameCopy, iAmRed);
+      agentCopy.moveOnColumn(i);
+      if (iAmRed) {
+        if (gameCopy.gameWon() == 'R') {
+          return i;
+        }
       }
-
-      if (myGame.getBoardMatrix()[i][lowestHorizontal] == myTeam &&
-          myGame.getBoardMatrix()[i][lowestHorizontal + 1] == myTeam &&
-          myGame.getBoardMatrix()[i][lowestHorizontal + 2] == myTeam) {
-
-        toReturn = lowestHorizontal + 3;
+      else {
+        if (gameCopy.gameWon() == 'Y') {
+          return i;
+        }
       }
-
     }
-    // for loop for indices- (vertical)
-    // for loop for columns+/- (horizontal)
-    // for loop for index+/-1 and column+/- (diagonal)
-    return toReturn;
+
+    return -1;
+
   }
+
+
+
+
 
   private int lowest(char[] row) {
     char lol = 'Y';
@@ -155,7 +198,7 @@ public class MyAgent extends Agent {
 
     int lowest = Integer.MAX_VALUE;
     for (int i = 0; i < row.length; i++) {
-      if (row[i] == poo) {
+      if (row[i] == lol) {
         if (i < lowest) {
           lowest = i;
         }
@@ -177,10 +220,26 @@ public class MyAgent extends Agent {
    * @return the column that would allow the opponent to win.
    */
   public int theyCanWin() {
-    // Check vertical
-    // Check horizontal
-    // Check diagonal
-    return 0;
+    for (int i = 0; i < 6; i++) {
+      // create a copy of the current game
+      Connect4Game gameCopy = new Connect4Game(myGame);
+      // need an agent to play our copied game
+      MyAgent agentCopy = new MyAgent(gameCopy, iAmRed);
+      agentCopy.moveOnColumn(i);
+      if (iAmRed) {
+        if (gameCopy.gameWon() == 'Y') {
+          return i;
+        }
+      }
+      else {
+        if (gameCopy.gameWon() == 'R') {
+          return i;
+        }
+      }
+    }
+
+    return -1;
+
   }
 
   /**
