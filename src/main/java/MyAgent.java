@@ -41,10 +41,18 @@ public class MyAgent extends Agent {
    *
    */
   public void move() {
-
-    // If the enemy is going to win. Block them.
-    // If you are going to win. Do it.
-
+ // If you are going to win. Do it.
+ // Make first move in the middle game.something
+    if (this.iCanWin() > -1) {
+      this.moveOnColumn(this.iCanWin());
+    }
+    else if (this.theyCanWin() > -1) {
+      this.moveOnColumn(this.theyCanWin());
+    }
+    else {
+      this.randomMove();
+    }
+ // If the enemy is going to win. Block them.
   }
 
   /**
@@ -189,7 +197,7 @@ public class MyAgent extends Agent {
 
 
 
-  private int lowest(char[] row) {
+  /* private int lowest(char[] row) {
     char lol = 'Y';
 
     if (iAmRed) {
@@ -208,7 +216,7 @@ public class MyAgent extends Agent {
       return -1;
     }
     return lowest;
-  }
+  }  */
 
   /**
    * Returns the column that would allow the opponent to win.
@@ -224,7 +232,7 @@ public class MyAgent extends Agent {
       // create a copy of the current game
       Connect4Game gameCopy = new Connect4Game(myGame);
       // need an agent to play our copied game
-      MyAgent agentCopy = new MyAgent(gameCopy, iAmRed);
+      MyAgent agentCopy = new MyAgent(gameCopy, !iAmRed);
       agentCopy.moveOnColumn(i);
       if (iAmRed) {
         if (gameCopy.gameWon() == 'Y') {
