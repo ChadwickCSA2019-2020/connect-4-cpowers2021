@@ -10,7 +10,7 @@ public class MyAgent extends Agent {
 	int start = 1;
 	int end = 2;
 	int[] ice = Arrays.copyOfRange(fire, start, end+1);
-	
+
   /**
    * A random number generator to randomly decide where to place a token.
    */
@@ -47,7 +47,18 @@ public class MyAgent extends Agent {
    *
    */
   public void move() {
-	 moveOnColumn(3);
+ // If you are going to win. Do it.
+ // Make first move in the middle game.something
+    if (this.iCanWin() > -1) {
+      this.moveOnColumn(this.iCanWin());
+    }
+    else if (this.theyCanWin() > -1) {
+      this.moveOnColumn(this.theyCanWin());
+    }
+    else {
+      this.randomMove();
+    }
+ // If the enemy is going to win. Block them.
   }
 
   /**
@@ -109,24 +120,109 @@ public class MyAgent extends Agent {
    * Returns the column that would allow the agent to win.
    *
    * <p>You might want your agent to check to see if it has a winning move available to it so that
-   * it can go ahead and make that move. Implement this method to return what column would
+   * it can go ahead and make that move. Implemen  t this method to return what column would
    * allow the agent to win.</p>
    *
    * @return the column that would allow the agent to win.
    */
+  // i can win horizontal
+  //  public int iCanWin() {
+  //    // i = 0
+  //
+  //    int columns = myGame.getColumnCount();
+  //    int rows = myGame.getRowCount();
+  //    char myTeam = 'Y';
+  //
+  //    if (iAmRed) {
+  //      myTeam = 'R';
+  //    }
+  //    // theres no winning spot
+  //    int toReturn = -1;
+  //
+  //    for (int i = 0; i < rows; i++) {
+  //      int lowestHorizontal = lowest(myGame.getBoardMatrix()[i]);
+  //      if (lowestHorizontal == -1) {
+  //        continue;
+  //      }
+  //
+  //      if (myGame.getBoardMatrix()[i][lowestHorizontal] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestHorizontal + 1] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestHorizontal + 2] == myTeam) {
+  //
+  //        toReturn = lowestHorizontal + 3;
+  //      }
+  //
+  //      // for loop for indices- (vertical)
+  //    }
+  //
+  //    for (int i = 0; i < columns; i++) {
+  //      int lowestVertical = lowest(myGame.getBoardMatrix()[i]);
+  //      if (lowestVertical == -1) {
+  //        continue;
+  //      }
+  //
+  //      if (myGame.getBoardMatrix()[i][lowestVertical] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestVertical + 1] == myTeam &&
+  //          myGame.getBoardMatrix()[i][lowestVertical + 2] == myTeam) {
+  //
+  //        toReturn = lowestVertical + 3;
+  //      }
+  //
+  //    }
+  //
+  //    // for loop for columns+/- (horizontal)
+  //    // for loop for index+/-1 and column+/- (diagonal)
+  //    return toReturn;
+  //  }
+
+  // i can win vertical and horizontal
   public int iCanWin() {
-	 /* for (int i = 0; i<6; i++) {
-		 // if(myAgent.getLowestEmptyIndex(i-1) && myAgent.getLowestEmptyIndex(i-1) )
-	  //} */
-		 
-    return 0;
-    //for loop for indices /- below spot (vert)
-    //for loop for columns+/- right and left
-    //for loop +/-1 and column+/- (diagonal)
-    //check vertical
-    //check horizontal
-    //check diagonal
+    for (int i = 0; i < 6; i++) {
+      // create a copy of the current game
+      Connect4Game gameCopy = new Connect4Game(myGame);
+      // need an agent to play our copied game
+      MyAgent agentCopy = new MyAgent(gameCopy, iAmRed);
+      agentCopy.moveOnColumn(i);
+      if (iAmRed) {
+        if (gameCopy.gameWon() == 'R') {
+          return i;
+        }
+      }
+      else {
+        if (gameCopy.gameWon() == 'Y') {
+          return i;
+        }
+      }
+    }
+
+    return -1;
+
   }
+
+
+
+
+
+  /* private int lowest(char[] row) {
+    char lol = 'Y';
+
+    if (iAmRed) {
+      lol = 'R';
+    }
+
+    int lowest = Integer.MAX_VALUE;
+    for (int i = 0; i < row.length; i++) {
+      if (row[i] == lol) {
+        if (i < lowest) {
+          lowest = i;
+        }
+      }
+    }
+    if (lowest == Integer.MAX_VALUE) {
+      return -1;
+    }
+    return lowest;
+  }  */
 
   /**
    * Returns the column that would allow the opponent to win.
@@ -138,7 +234,26 @@ public class MyAgent extends Agent {
    * @return the column that would allow the opponent to win.
    */
   public int theyCanWin() {
-    return 0;
+    for (int i = 0; i < 6; i++) {
+      // create a copy of the current game
+      Connect4Game gameCopy = new Connect4Game(myGame);
+      // need an agent to play our copied game
+      MyAgent agentCopy = new MyAgent(gameCopy, !iAmRed);
+      agentCopy.moveOnColumn(i);
+      if (iAmRed) {
+        if (gameCopy.gameWon() == 'Y') {
+          return i;
+        }
+      }
+      else {
+        if (gameCopy.gameWon() == 'R') {
+          return i;
+        }
+      }
+    }
+
+    return -1;
+
   }
 
   /**
@@ -147,6 +262,6 @@ public class MyAgent extends Agent {
    * @return the agent's name
    */
   public String getName() {
-    return "My Agent";
+    return "boiblaster";
   }
 }
