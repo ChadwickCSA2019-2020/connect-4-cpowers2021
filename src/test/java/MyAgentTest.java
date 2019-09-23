@@ -222,7 +222,7 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
     assertTrue(numberOfWins >= 45);
   }
 
-  //Tests you can win against a Random agent as Red
+  //Tests you can win against a Random agent as Yellow
   @Test
   public void testYellowWinningRandomAgent() {
     Agent redAgent = new RandomAgent(game, true);

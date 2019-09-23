@@ -46,9 +46,15 @@ public class MyAgent extends Agent {
    * <p>If an invalid move is made, the game engine will announce it and the game will be ended.</p>
    *
    */
-  public void move() {
- // If you are going to win. Do it.
- // Make first move in the middle game.something
+  boolean firstMove = false;
+  public void move(){
+    if (!firstMove){
+      moveOnColumn(3);
+      firstMove = true;
+    }
+
+    // If you are going to win. Do it.
+    // Make first move in the middle game.something
     if (this.iCanWin() > -1) {
       this.moveOnColumn(this.iCanWin());
     }
@@ -56,9 +62,11 @@ public class MyAgent extends Agent {
       this.moveOnColumn(this.theyCanWin());
     }
     else {
+
       this.randomMove();
+
     }
- // If the enemy is going to win. Block them.
+    // If the enemy is going to win. Block them.
   }
 
   /**
