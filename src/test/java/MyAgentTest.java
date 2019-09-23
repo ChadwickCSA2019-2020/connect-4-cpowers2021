@@ -5,16 +5,9 @@ import org.junit.Test;
 
 public class MyAgentTest {
 
-<<<<<<< HEAD
-  Connect4Game game; 
-final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
-||||||| merged common ancestors
-  Connect4Game game; 
-
-=======
   Connect4Game game;
+final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
 
->>>>>>> 36a24a46e9a79303ade07b2af088c7e810439364
 
   @Before
   public void setUp() throws Exception {
@@ -54,36 +47,7 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
 
   }
 
-  // TODO: Write 2 test cases for testICanWinHorizontally 
-<<<<<<< HEAD
-  public void testICanWinHorizontallySimple() {
-	  MyAgent redAgent = new MyAgent(game, true);
-	    MyAgent yellowAgent = new MyAgent(game, false);
-	    game.clearBoard();
-	    for(int i = 1;i<4;i++) {
-	    	redAgent.moveOnColumn(i);
-	        yellowAgent.moveOnColumn(i);
-	    }
-	    assertEquals(redAgent.iCanWin(), 4);
-  }
-  
-  public void testICanWinHorizontallyTop4() {
-	  MyAgent redAgent = new MyAgent(game, true);
-	    MyAgent yellowAgent = new MyAgent(game, false);
-	    game.clearBoard();
-	    for(int i = 1;i<4;i++) {
-	    	redAgent.moveOnColumn(i);
-	        yellowAgent.moveOnColumn(i);
-	    }
-	    for(int i = 1;i<4;i++) {
-	    	redAgent.moveOnColumn(i);
-	        yellowAgent.moveOnColumn(i);
-	    }
-	    //yellow, red, yellow, check
-	    assertEquals(redAgent.iCanWin(), 4);
-  }
-||||||| merged common ancestors
-=======
+  // TODO: Write 2 test cases for testICanWinHorizontally
   @Test
   public void testICanWinHorizontally() {
     MyAgent redAgent = new MyAgent(game, true);
@@ -93,27 +57,44 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
       redAgent.moveOnColumn(i);
       yellowAgent.moveOnColumn(i);
     }
->>>>>>> 36a24a46e9a79303ade07b2af088c7e810439364
 
-<<<<<<< HEAD
+    assertEquals(redAgent.iCanWin(), 3);
+
+  }
+
+  @Test
+  public void testICanWinHorizontally2() {
+    MyAgent redAgent = new MyAgent(game, true);
+    MyAgent yellowAgent = new MyAgent(game, false);
+    game.clearBoard();
+    for (int i = 1; i < 4; i++) {
+      redAgent.moveOnColumn(i);
+      yellowAgent.moveOnColumn(i);
+    }
+
+    assertEquals(redAgent.iCanWin(), 0);
+
+  }
+
   // TODO: Write 2 test cases for testICanWinDiagonally
-  public void testICanWinDiagonallySimple() {
+  public void testICanWinDiagonally() {
 	  MyAgent redAgent = new MyAgent(game, true);
 	    MyAgent yellowAgent = new MyAgent(game, false);
 	    game.clearBoard();
-	    redAgent.moveOnColumn(0);
+	  redAgent.moveOnColumn(0);
 		yellowAgent.moveOnColumn(1);
 		redAgent.moveOnColumn(1);
 		yellowAgent.moveOnColumn(2);
-		redAgent.moveOnColumn(0);
+		redAgent.moveOnColumn(3);
 		yellowAgent.moveOnColumn(2);
 		redAgent.moveOnColumn(2);
 		yellowAgent.moveOnColumn(3);
-		redAgent.moveOnColumn(3);
+		redAgent.moveOnColumn(4);
 		yellowAgent.moveOnColumn(3);
+
 	    assertEquals(redAgent.iCanWin(), 3);
   }
-  
+
   public void testICanWinDiagonallyTop4() {
 	  MyAgent redAgent = new MyAgent(game, true);
 	    MyAgent yellowAgent = new MyAgent(game, false);
@@ -133,48 +114,8 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
 		redAgent.moveOnColumn(3);
 		yellowAgent.moveOnColumn(2);
 		assertEquals(redAgent.iCanWin(), 2);
-  }  
-||||||| merged common ancestors
-  // TODO: Write 2 test cases for testICanWinDiagonally
-
-=======
-    assertEquals(redAgent.iCanWin(), 3);
-
   }
->>>>>>> 36a24a46e9a79303ade07b2af088c7e810439364
-  @Test
-  public void testICanWinHorizontally2() {
-    MyAgent redAgent = new MyAgent(game, true);
-    MyAgent yellowAgent = new MyAgent(game, false);
-    game.clearBoard();
-    for (int i = 1; i < 4; i++) {
-      redAgent.moveOnColumn(i);
-      yellowAgent.moveOnColumn(i);
-    }
-
-    assertEquals(redAgent.iCanWin(), 0);
-
-  }
-
-  // TODO: Write 2 test cases for testICanWinDiagonally
-  @Test
-  public void testICanWinDiagonally() {
-    MyAgent redAgent = new MyAgent(game, true);
-    MyAgent yellowAgent = new MyAgent(game, false);
-    game.clearBoard();
-    redAgent.moveOnColumn(0);
-    yellowAgent.moveOnColumn(1);
-    redAgent.moveOnColumn(1);
-    yellowAgent.moveOnColumn(2);
-    redAgent.moveOnColumn(3);
-    yellowAgent.moveOnColumn(2);
-    redAgent.moveOnColumn(2);
-    yellowAgent.moveOnColumn(3);
-    redAgent.moveOnColumn(4);
-    yellowAgent.moveOnColumn(3);
-
-    assertEquals(redAgent.iCanWin(), 3);
-  }
+  
   @Test
   public void testICanWinDiagonally2() {
     MyAgent redAgent = new MyAgent(game, true);
@@ -195,19 +136,6 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
   }
 
   // TODO: Write testTheyCanWinHorizontally
-<<<<<<< HEAD
-  public void testTheyCanWinHorizontally() {
-	  MyAgent redAgent = new MyAgent(game, true);
-	    MyAgent yellowAgent = new MyAgent(game, false);
-	    game.clearBoard();
-	    for(int i = 0;i<3;i++) {
-	    	yellowAgent.moveOnColumn(i);
-	        redAgent.moveOnColumn(i);
-	    }
-	    assertEquals(redAgent.theyCanWin(), 3);
-  }
-||||||| merged common ancestors
-=======
   @Test
   public void testTheyCanWinHorizontally() {
     MyAgent redAgent = new MyAgent(game, true);
@@ -217,7 +145,6 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
       yellowAgent.moveOnColumn(i);
       redAgent.moveOnColumn(i);
     }
->>>>>>> 36a24a46e9a79303ade07b2af088c7e810439364
 
     assertEquals(3, redAgent.theyCanWin());
   }
@@ -237,7 +164,7 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
 		redAgent.moveOnColumn(3);
 		yellowAgent.moveOnColumn(3);
 		redAgent.moveOnColumn(3);
-		
+
 	    assertEquals(redAgent.theyCanWin(), 3);
   }
 ||||||| merged common ancestors
@@ -272,10 +199,10 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
     int numberOfWins = 0;
     for (int i = 0; i < 50; i++) {
 <<<<<<< HEAD
-      game.clearBoard(); 
+      game.clearBoard();
       while(!game.boardFull() && game.gameWon() == 'N') {
 ||||||| merged common ancestors
-      game.clearBoard(); 
+      game.clearBoard();
       while(!game.boardFull() || game.gameWon() == 'N') {
 =======
       game.clearBoard();
@@ -304,7 +231,7 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
     Agent yellowAgent = new MyAgent(game, false);
     int numberOfWins = 0;
     for (int i = 0; i < 50; i++) {
-      game.clearBoard(); 
+      game.clearBoard();
       while(!game.boardFull() && game.gameWon() == 'N') {
         redAgent.move();
         if (game.gameWon() != 'R') {
@@ -328,7 +255,7 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
     Agent yellowAgent = new RandomAgent(game, false);
     int numberOfWins = 0;
     for (int i = 0; i < 50; i++) {
-      game.clearBoard(); 
+      game.clearBoard();
       while(!game.boardFull() && game.gameWon() == 'N') {
         redAgent.move();
         if (game.gameWon() != 'R') {
@@ -352,7 +279,7 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
     Agent yellowAgent = new MyAgent(game, false);
     int numberOfWins = 0;
     for (int i = 0; i < 50; i++) {
-      game.clearBoard(); 
+      game.clearBoard();
       while(!game.boardFull() && game.gameWon() == 'N') {
         redAgent.move();
         if (game.gameWon() != 'R') {
@@ -517,7 +444,3 @@ final int NUM_OF_TEST_GAMES = 50; //put this where 50 is
     assertTrue(numberOfWins >= 45);
   }
 }
-
-
-
-
