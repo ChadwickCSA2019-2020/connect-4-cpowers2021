@@ -46,20 +46,21 @@ public class MyAgent extends Agent {
    * <p>If an invalid move is made, the game engine will announce it and the game will be ended.</p>
    *
    */
+
 	public void move(){
 		// First move is in the middle
-		boolean firstMove = false;
-		if (!firstMove){
+    if (!firstMove){
       moveOnColumn(3);
       firstMove = true;
     }
 
-		//make a copy of the board
-		//check iCanWin and theyCanWin like below, except move on the copy board, not the actual board yet
+		// make a copy of the board
+		// check iCanWin and theyCanWin like below, except move on the copy board, not the actual board yet
 		// run theyCanWin similar to below, storing the value of the column (if it's not -1) in a variable
 		// make a move on the copy board using randomMove, but exclude the column from previous step in possible moves that randomMove can make
 
     // If you are going to win. Do it.
+		// If the enemy is going to win. Block them.
     if (this.iCanWin() > -1) {
       this.moveOnColumn(this.iCanWin());
     }
@@ -71,7 +72,6 @@ public class MyAgent extends Agent {
       this.randomMove();
 
     }
-    // If the enemy is going to win. Block them.
   }
 
   /**
