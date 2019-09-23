@@ -219,7 +219,7 @@ public class MyAgentTest {
     assertTrue(numberOfWins >= 45);
   }
 
-  //Tests you can win against a Random agent as Red
+  //Tests you can win against a Random agent as Yellow
   @Test
   public void testYellowWinningRandomAgent() {
     Agent redAgent = new RandomAgent(game, true);
