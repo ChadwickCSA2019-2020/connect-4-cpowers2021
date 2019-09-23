@@ -77,6 +77,9 @@ public class MyAgentTest {
   }
 
   // TODO: Write 2 test cases for testICanWinDiagonally
+  // We made 3, just to be thorough
+
+  @Test
   public void testICanWinDiagonally() {
     MyAgent redAgent = new MyAgent(game, true);
     MyAgent yellowAgent = new MyAgent(game, false);
@@ -95,6 +98,7 @@ public class MyAgentTest {
     assertEquals(redAgent.iCanWin(), 3);
   }
 
+  @Test
   public void testICanWinDiagonallyTop4() {
     MyAgent redAgent = new MyAgent(game, true);
     MyAgent yellowAgent = new MyAgent(game, false);
