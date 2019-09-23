@@ -49,7 +49,8 @@ public class MyAgent extends Agent {
 
 	public void move(){
 		// First move is in the middle
-    if (!firstMove){
+    boolean firstMove = myGame.getRedPlayedFirst();
+	  if (!firstMove){
       moveOnColumn(3);
       firstMove = true;
     }
