@@ -23,7 +23,8 @@ public class MyAgentTest {
       redAgent.moveOnColumn(1);
       yellowAgent.moveOnColumn(2);
     }
-
+    //TODO: flip test cases so that it's expected, actual 
+    //      e.g. (1, redAgent.iCanWin())
     assertEquals(redAgent.iCanWin(), 1);
 
   }

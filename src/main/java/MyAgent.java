@@ -197,6 +197,7 @@ public class MyAgent extends Agent {
       // need an agent to play our copied game
       MyAgent agentCopy = new MyAgent(gameCopy, iAmRed);
       agentCopy.moveOnColumn(i);
+      //TODO: You can simplify these if statements
       if (iAmRed) {
         if (gameCopy.gameWon() == 'R') {
           return i;
