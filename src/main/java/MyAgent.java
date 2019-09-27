@@ -49,30 +49,44 @@ public class MyAgent extends Agent {
      */
 
     public void move(){
-        if (this.iCanWin() != -1) {
+        // First move is in the middle
+        boolean firstMove = myGame.getRedPlayedFirst();
+        if (!iAmRed && !firstMove){
+            moveOnColumn(3);
+        }
+        else if (iAmRed && !firstMove) {
+            moveOnColumn(3);
+        }
+
+
+        if (iCanWin() != -1) {
             moveOnColumn(iCanWin());
         }
-        else if (this.theyCanWin() != -1) {
+        else if (theyCanWin() != -1) {
             moveOnColumn(theyCanWin());
         }
         else {
-            for (int i = 0; i < 6; i++) {
-                Connect4Game gameCopy = new Connect4Game(myGame);
-                MyAgent agentCopy = new MyAgent(gameCopy, iAmRed);
-                agentCopy.moveOnColumn(i);
-                if (agentCopy.theyCanWin() > -1) {
-                    avoid = [i];
+            ArrayList<Integer> noGo = weDie();
+            for (int i = 0; i < 7; i++) {
+                if ((noGo.get(i) != -1) && (myGame.boardFull() == false)) {
+                    moveOnColumn(i);
+                    break;
                 }
             }
         }
 
-        // First move is in the middle
-        boolean firstMove = myGame.getRedPlayedFirst();
-        if (!firstMove){
-            System.out.println("Moving in middle column, first move");
-            moveOnColumn(3);
-            firstMove = true;
-        }
+
+        //        if (this.iCanWin() > -1) {
+        //            this.moveOnColumn(this.iCanWin());
+        //        }
+        //        else if (this.theyCanWin() > -1) {
+        //            this.moveOnColumn(this.theyCanWin());
+        //        }
+        //        else {
+        //
+        //            this.randomMove();
+        //
+        //        }
     }
 
     public ArrayList<Integer> weDie() {
@@ -86,26 +100,16 @@ public class MyAgent extends Agent {
             if (agentMeCopy.theyCanWin() > -1) {
                 avoid.add(i);
             }
+            if (agentMeCopy.theyCanWin() == -1) {
+                avoid.add(-1);
+            }
         }
         return avoid;
     }
     // write move so that it chooses which of the viable columns to move on --> move on column
-    
+
     // If you are going to win. Do it.
     // If the enemy is going to win. Block them.
-
-    //                if (this.iCanWin() > -1) {
-    //                this.moveOnColumn(this.iCanWin());
-    //            }
-    //            else if (this.theyCanWin() > -1) {
-    //                this.moveOnColumn(this.theyCanWin());
-    //            }
-    //            else {
-    //
-    //                this.randomMove();
-    //
-    //            }
-    //        }
 
     /**
      * Drops a token into a particular column so that it will fall to the bottom of the column.
